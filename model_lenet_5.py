@@ -47,7 +47,7 @@ def plot_losses(train_losses, valid_losses):
             xlabel='Epoch',
             ylabel='Loss')
     ax.legend()
-    fig.show()
+    plt.show()
 
     # plot style을 기본값으로 설정
     plt.style.use('default')
@@ -70,7 +70,7 @@ def plot_losses(train_acc, valid_acc):
             xlabel='Epoch',
             ylabel='Accuracy')
     ax.legend()
-    fig.show()
+    plt.show()
 
     # plot style을 기본값으로 설정
     plt.style.use('default')
