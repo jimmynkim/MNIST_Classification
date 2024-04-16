@@ -95,7 +95,7 @@ def plot_acc(train_acc, valid_acc):
             xlabel='Epoch',
             ylabel='Accuracy')
     ax.legend()
-    fig.show()
+    plt.show()
 
     # plot style을 기본값으로 설정
     plt.style.use('default')
@@ -152,11 +152,13 @@ def training_loop(model, criterion, optimizer, train_loader, valid_loader, epoch
     '''
     전체 training loop를 정의하는 함수
     '''
-
+    
     # metrics를 저장하기 위한 객체 설정
     best_loss = 1e10
     train_losses = []
     valid_losses = []
+    train_accuracies = []  
+    valid_accuracies = []  
 
     # model 학습하기
     for epoch in range(0, epochs):
@@ -170,19 +172,32 @@ def training_loop(model, criterion, optimizer, train_loader, valid_loader, epoch
             model, valid_loss = validate(valid_loader, model, criterion, device)
             valid_losses.append(valid_loss)
 
-        if epoch % print_every == (print_every - 1):
 
+            
             train_acc = get_accuracy(model, train_loader, device=device)
             valid_acc = get_accuracy(model, valid_loader, device=device)
+            train_accuracies.append(train_acc)
+            valid_accuracies.append(valid_acc)    
 
-            print(f'{datetime.now().time().replace(microsecond=0)} --- '
+            if epoch % print_every == (print_every - 1):            
+
+              print(f'{datetime.now().time().replace(microsecond=0)} --- '
                   f'Epoch: {epoch}\t'
                   f'Train loss: {train_loss:.4f}\t'
                   f'Valid loss: {valid_loss:.4f}\t'
                   f'Train accuracy: {100 * train_acc:.2f}\t'
                   f'Valid accuracy: {100 * valid_acc:.2f}')
 
+
+    # 보간하여 부드러운 곡선 만들기
+    epochs_interp = np.linspace(0, epochs-1, num=len(train_accuracies))
+    train_acc_interp = np.interp(epochs_interp, range(epochs), train_accuracies)
+    valid_acc_interp = np.interp(epochs_interp, range(epochs), valid_accuracies)
+
+    # Loss 및 Accuracy 시각화
     plot_losses(train_losses, valid_losses)
+    plot_acc(train_acc_interp, valid_acc_interp)
+
 
     return model, optimizer, (train_losses, valid_losses)
 
