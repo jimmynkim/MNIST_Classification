@@ -9,6 +9,7 @@
 
 LeNet-5와 MLP의 각각의 파라미터 수
 
+
 **(LeNet-5)**
 
 1. Conv2d 층의 파라미터 수 계산:
@@ -34,6 +35,7 @@ LeNet-5와 MLP의 각각의 파라미터 수
 
 파라미터 수 = (입력 채널 수 × 출력 채널 수 × 커널 높이 × 커널 너비) + 출력 채널 수 = (16 × 120 × 5 × 5) + 120 = 48120
 
+
 2. Linear 층의 파라미터 수 계산:
 
 * 첫 번째 Linear 층:
@@ -52,6 +54,7 @@ LeNet-5와 MLP의 각각의 파라미터 수
 
 따라서 LeNet-5 모델은 총 61,806개의 파라미터를 가짐
 
+
 **(MLP)**
 
 1. 입력층에서 첫 번째 은닉층으로의 파라미터 수:
@@ -62,6 +65,7 @@ LeNet-5와 MLP의 각각의 파라미터 수
 * 편향 벡터 크기: (256,)
 * 파라미터 수 = (입력 특성 수 × 은닉층 뉴런 수) + 은닉층 뉴런 수 = (784 × 256) + 256 = 200960
 
+
 2. 첫 번째 은닉층에서 두 번째 은닉층으로의 파라미터 수:
 
 * 입력 특성 수: 256 (이전 은닉층의 출력 크기)
@@ -69,6 +73,7 @@ LeNet-5와 MLP의 각각의 파라미터 수
 * 가중치 행렬 크기: (256, 128)
 * 편향 벡터 크기: (128,)
 * 파라미터 수 = (입력 특성 수 × 은닉층 뉴런 수) + 은닉층 뉴런 수 = (256 × 128) + 128 = 32896
+
 
 3. 두 번째 은닉층에서 출력층으로의 파라미터 수:
 
@@ -82,6 +87,7 @@ LeNet-5와 MLP의 각각의 파라미터 수
 = 200960 + 32896 + 1290 = 234146
 
 따라서 MLP 모델은 총 234,146개의 파라미터를 가짐
+
 
 Epoch에 따른 Loss와 Accuracy
 
@@ -123,6 +129,7 @@ Epoch에 따른 Loss와 Accuracy
 * epoch: 14, train accuracy: 0.8977, validation accuracy: 0.8956, train loss: 6.5561, test loss: 5.5719
 
 **(Plot)**
+
 ![Lenet5-1](https://github.com/jimmynkim/MNIST_Classification/assets/75557016/da93b6d6-9aa6-4f89-9d7c-eb619644c394)
 ![Lenet5-2](https://github.com/jimmynkim/MNIST_Classification/assets/75557016/2493d193-f873-4117-8dbe-f2e3865ad067)
 ![MLP1](https://github.com/jimmynkim/MNIST_Classification/assets/75557016/9447731c-97e7-4559-8dbf-c6dd371dad8f)
